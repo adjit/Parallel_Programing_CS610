@@ -25,10 +25,42 @@ public class MyClient {
 			inputArr[i] = Integer.parseInt(stringInput[i]);
 		}
 		
+		scan.close();
+		
+		int a = inputArr[0];
+		int b = inputArr[1];
+		int result = 0;
+		
 		switch(funct) {
 			case 1:
-				int result = p3i.add(inputArr[0], inputArr[1]);
-				
+				result = p3i.add(a, b);
+				System.out.println(a + " + " + b + " = " + result);
+				break;
+			case 2:
+				result = p3i.subtract(a, b);
+				System.out.println(a + " - " + b + " = " + result);
+				break;
+			case 3:
+				result = p3i.multiply(a, b);
+				System.out.println(a + " * " + b + " = " + result);
+				break;
+			case 4:
+				if(b == 0) {
+					System.out.println("Division by zero is wrong.");
+					break;
+				}
+				else {
+					result = p3i.divid(a, b);
+					System.out.println(a + " / " + b + " = " + result);
+					break;
+				}
+			case 5:
+				result = p3i.gcd(a, b);
+				System.out.println("gcd(" + a + ", " + b + ") = " + result);
+				break;
+			case 6:
+				result = p3i.lcm(a, b);
+				System.out.println("lcm(" + a + ", " + b + ") = " + result);
 				break;
 		}
 	}
