@@ -1,8 +1,6 @@
 import java.rmi.*;
-
 public interface Project3Interface extends Remote {
-
-	//This interface is complete. Do NOT CHANGE IT.
+  //This interface is complete. Do NOT CHANGE IT.
 	
 	public int add(int a, int b) throws RemoteException;		//returns a+b
 	public int subtract(int a, int b) throws RemoteException; 	//returns a-b
