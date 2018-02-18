@@ -18,13 +18,17 @@ public class MyClient {
 		
 		//Poll for two integers
 		System.out.println("Enter two integers:");
-		//String[] stringInput = scan.nextLine().split(" ");
+		String[] stringInput = scan.nextLine().split(" ");
+		int[] inputArr = new int[stringInput.length];
 		
-		int a = scan.nextInt();
-		int b = scan.nextInt();
+		for(int i = 0; i < stringInput.length; i++) {
+			inputArr[i] = Integer.parseInt(stringInput[i]);
+		}
 		
 		scan.close();
 		
+		int a = inputArr[0];
+		int b = inputArr[1];
 		int result = 0;
 		
 		switch(funct) {
