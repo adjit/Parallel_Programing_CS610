@@ -43,15 +43,8 @@ public class Main extends HttpServlet {
 		
 		html += "</body></html>";
 		
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	    PrintWriter out = response.getWriter();
 	    out.println(html);
-	    /*
-	    out.println("<html><title>Hello</title><body>\n");
-	    out.println("<font color = blue>");
-	    out.println("<h1>Hello there!</h1>\n");
-	    out.println("</font>");
-	    out.println("</body></html>");*/
 	    out.close();
 
 	}
