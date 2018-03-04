@@ -1,0 +1,39 @@
+
+import java.sql.*;
+//Connection;
+//import java.sql.DriverManager;
+//import java.sql.ResultSet;
+//import java.sql.Statement;
+
+public class Main {
+  public static void main(String[] args){
+    java.util.Scanner keyboard = new java.util.Scanner(System.in);
+    try {
+      Class.forName("com.mysql.jdbc.Driver").newInstance();
+      Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost/?user=root&password="); 
+      Statement stmt = con.createStatement();
+      stmt.execute("CREATE DATABASE IF NOT EXISTS mydatabase");
+      stmt.execute("USE mydatabase");
+      stmt.execute("DROP TABLE IF EXISTS simple");
+      stmt.execute("CREATE TABLE IF NOT EXISTS simple( name char(50))");
+      //Enter a number of line. In each line a first name, a space, and a last name.
+      //At the end enter the word end.
+      while(true)
+      {
+        System.out.println("Enter a first name, a space, a last name or enter word: end.");
+        String name = keyboard.nextLine();
+        if(name.equals("end")) break;
+        String s = "Insert into simple values(\"" + name + "\")";
+        stmt.execute(s);
+      }
+      ResultSet rs = stmt.executeQuery("Select * from simple");
+      while (rs.next())
+        System.out.println(rs.getString(1));
+    } catch (Exception ex) {
+      System.out.println(ex);
+      System.exit(0);
+    }
+    keyboard.close();
+  }
+}

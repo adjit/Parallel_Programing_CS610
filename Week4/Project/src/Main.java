@@ -15,7 +15,7 @@ import java.util.Vector;
 @WebServlet("/Main")
 public class Main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Vector<String> clientList = new Vector<String>();
+	private Vector<String> clientList;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -23,6 +23,7 @@ public class Main extends HttpServlet {
     public Main() {
         super();
         // TODO Auto-generated constructor stub
+        clientList = new Vector<String>();
     }
 
 	/**
