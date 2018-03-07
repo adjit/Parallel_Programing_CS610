@@ -76,7 +76,6 @@ public class Main extends HttpServlet {
 					html += names.get(i).toString() + "<br/>";
 				}
 			}			
-			
 		} catch (Exception ex) {
 			System.out.println(ex);
 			System.exit(0);
