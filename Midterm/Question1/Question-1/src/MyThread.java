@@ -22,6 +22,7 @@ public class MyThread extends Thread implements Runnable {
 	
 	private int countOccurancesOf(char letter) {
 		int count = 0;
+		letter = Character.toUpperCase(letter);
 		
 		for(int i = 0; i < upperLine.length(); i++)
 			if(upperLine.charAt(i) == letter) count++;
