@@ -3,28 +3,30 @@
 #include <pthread.h>
 
 void* MonteCarlo(void*);
-float random();
+float randomNO();
+long long int total_in_circle;
 
 typedef struct {
-	int number_of_tosses;
-	long long int** number_in_circle;
+	long long int number_of_tosses;
+	long long int* number_in_circle;
 	pthread_mutex_t mutex;
 } darts;
 
 int main() {
-	int thread_count, number_of_tosses;
+	int thread_count;
 	long thread;
-	long long int number_in_circle = 0;
+	long long int number_of_tosses, number_in_circle = 0;
 	double pi_estimate = 0.0;
 	darts* data;
 	pthread_t* thread_handles;
+	pthread_mutex_t mutex;
+	total_in_circle = 0;
 
 	printf("How many threads? ");
 	scanf("%d", &thread_count);
 
-	printf("\nHow many tosses? ");
-	scanf("%d", &number_of_tosses);
-	printf("\n");
+	printf("How many tosses? ");
+	scanf("%lld", &number_of_tosses);
 
 	thread_handles = (pthread_t*)malloc(thread_count * sizeof(pthread_t));
 	data = (darts*)malloc(thread_count * sizeof(darts));
@@ -44,7 +46,7 @@ int main() {
 
 	pi_estimate = 4 * (double)number_in_circle / (double)number_of_tosses;
 
-	printf("PI estimate: %f", pi_estimate);
+	printf("PI estimate: %f\n", pi_estimate);
 
 	free(thread_handles);
 	return 0;
@@ -58,19 +60,20 @@ void* MonteCarlo(void* args) {
 
 	darts* data = (darts*)args;
 
-	for (toss = 0; toss < data.number_of_tosses; toss++) {
-		x = random();
-		y = random();
+	for (toss = 0; toss < data->number_of_tosses; toss++) {
+		x = randomNO();
+		y = randomNO();
 		d_squared = x*x + y*y;
 
 		if (d_squared <= 1) number_in_circle++;
 	}
 	
-	pthread_mutex_lock(&data.mutex);
-	data.number_in_circle += number_in_circle;
+	pthread_mutex_lock(&data->mutex);
+	*data->number_in_circle += number_in_circle;
+	pthread_mutex_unlock(&data->mutex);
 	return NULL;
 }
 
-float random() {
-	return rand() / RAND_MAX;
+float randomNO() {
+	return -1+2*((float)rand())/RAND_MAX;
 }
